@@ -26,8 +26,10 @@ function addMarker(map, style, title, coord) {
     return L.marker(coord, {icon: icons[style], title: title}).addTo(map);
 }
          
-function drawPolyline(map, trip) {
-    let polyline, points = [], point, title;
+function drawPolyline(map, trip, inProgress) {
+    inProgress = !!inProgress;
+
+    let polyline, polyline2, points = [], point, title;
     let startEnd = [trip.start, trip.end], 
         coords = trip['coords'];
                 
@@ -41,11 +43,21 @@ function drawPolyline(map, trip) {
         }
     }
     polyline = L.polyline(points, {
-        color: 'red',
+        color: 'grey',
         weight: 3,
         opacity: 0.5,
         smoothFactor: 1
     }).addTo(map);
+
+    if(inProgress) {
+        console.log(JSON.stringify(points.slice(0, trip.index)));
+        polyline2 = L.polyline(points.slice(0, trip.index), {
+            color: '#83D2E1',
+            weight: 3,
+            opacity: 1,
+            smoothFactor: 1
+        }).addTo(map);
+    };
 
     return polyline;
 }

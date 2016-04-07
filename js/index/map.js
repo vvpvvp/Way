@@ -32,9 +32,7 @@ let M = ()=> {
                 recent = history[history.length - 1];
 
                 // only draw recent one travel path                
-                
-
-                ways[id] = drawPolyline(map, recent);
+                ways[id] = drawPolyline(map, recent, true);
             }
             map.fitBounds(ways[id].getBounds());
         }
