@@ -28,7 +28,17 @@ function bindEvents() {
 
 function drawWay(coords) {
     let polyline, points = [], point;
-    polyline = L.polyline(coords, {color: 'red'}).addTo(map);
+    for (var i = coords.length - 1; i >= 0; i--) {
+        point = new  L.LatLng(coords[i][1], coords[i][0]);
+        console.log(coords[i][0] + ',' + coords[i][1]);
+        points.push(point);
+    }
+    polyline = L.polyline(points, {
+        color: 'red',
+        weight: 3,
+        opacity: 0.5,
+        smoothFactor: 1
+    }).addTo(map);
     map.fitBounds(polyline.getBounds());
 }
 
@@ -38,30 +48,14 @@ function drawMultipleWays(datas) {
         let recent = history[history.length - 1];
         let coords = recent['coords'];
         drawWay(coords);
-        alert(coords.length);
 
         return;
     }
 }
 
 bindEvents();
-initMap();
 
 $.get('data/ways.json', function(res) {
-    // drawMultipleWays(res);
+    initMap();
+    drawMultipleWays(res);
 });
-
-
-
-// var pointA = new L.LatLng(28.635308, 77.22496);
-// var pointB = new L.LatLng(28.984461, 77.70641);
-// var pointList = [pointA, pointB];
-
-// var firstpolyline = new L.Polyline(pointList, {
-// color: 'red',
-// weight: 3,
-// opacity: 0.5,
-// smoothFactor: 1
-
-// });
-// firstpolyline.addTo(map);
