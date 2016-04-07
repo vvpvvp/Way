@@ -23,12 +23,14 @@
           "leaflet/dist/leaflet.css",
           "./css/common.less",
           "jquery-mousewheel",
-          "handlebars/dist/handlebars"
+          "handlebars/dist/handlebars",
+          "./js/common"
         ]
       },
       "global": {
         "$": "jquery",
-        "jQuery": "jquery"
+        "jQuery": "jquery",
+        "Common":"./js/common"
       },
       "devServer": {}
     },

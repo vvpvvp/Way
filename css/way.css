@@ -1,7 +1,28 @@
+header{
+	height:500px;
+	background: #F67676;
+}
 
+.mapContainerDiv{
+  position:absolute;
+  left:0;
+  width:50%;
+  top:500px;
+  height:100%;
+}
 #mapContainer {
-  margin: 0 auto;
-  height: 280px;
-  width: 1024px;
-  background: #ccc;
+	height: 100%;
+}
+
+#blog{
+	margin: 0 20% 0 50%;
+	background: red;
+}
+
+#timeline {
+    position: absolute;
+    top: 500px;
+    right: 0;
+    width: 200px;
+    bottom: 0;
 }

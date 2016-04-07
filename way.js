@@ -1,8 +1,7 @@
-import initMap from './js/map';
+import map from './js/way/map';
+import control from './js/way/control';
 require('./css/way.css');
 $(()=>{
-	initMap('mapContainer');
-	$(document).on("mousewheel",function(event){
-		
-	});
+	map();
+	control();
 })
