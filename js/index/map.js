@@ -21,14 +21,18 @@ let M = ()=> {
 
     function drawMultipleWays(datas) {
         if (datas.length) {
-            let i, history, recent, coords, id;
+            let i, history, recent, coords, id, startEnd = [];
 
             for (i = datas.length - 1; i >= 0; i--) {
                 history = datas[i]['history'];
-                recent = history[history.length - 1];
-                coords = recent['coords'];
+                
                 id = datas[i]['id'];
-                ways[id] = drawPolyline(map, coords);
+                recent = history[history.length - 1];
+
+                // only draw recent one travel path                
+                
+
+                ways[id] = drawPolyline(map, recent);
             }
             map.fitBounds(ways[id].getBounds());
         }
