@@ -21,7 +21,9 @@
                     "jquery",
                     "leaflet",
                     "leaflet/dist/leaflet.css",
-                    "handlebars/dist/handlebars"
+                    "handlebars/dist/handlebars",
+                    "bootstrap/dist/js/bootstrap",
+                    "bootstrap/dist/css/bootstrap.min.css"
                 ]
             },
             "global": {
@@ -37,6 +39,7 @@
         "jquery": "^2.2.3",
         "leaflet": "^0.7.7",
         "mapbox": "^1.0.0-beta",
-        "momentjs": "^1.0.2"
+        "momentjs": "^1.0.2",
+        "bootstrap": "^3.3.6"
     }
 }

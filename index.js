@@ -1,22 +1,12 @@
 import template from "./js/template";
 import Handlebars from "handlebars/dist/handlebars";
 import L from "leaflet";
+import initMap from './js/map';
 
 require('./css/index.css');
 
-let temp = Handlebars.compile(template.userInfo);
-console.log(temp({a:"测试"}));
-console.log(1);
 
 let map, datas, ways = {};
-
-function initMap() {
-    let mapboxId = 'castafiore.k59m8f42',
-        mapboxUrl = 'http://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';
-
-    map = L.map('mapContainer', {center:[30.664789, 104.072941], zoom: 10, zoomControl: false});
-    L.tileLayer(mapboxUrl, {id: mapboxId}).addTo(map);
-}
 
 function bindEvents() {
   $(document).on('click', '.way', function() {
@@ -68,8 +58,7 @@ bindEvents();
 
 $.get('data/ways.json', function(res) {
     datas = res;
-    initMap();
+    map = initMap('mapContainer');
     renderTravelList(datas);
     drawMultipleWays(datas);
 });
-

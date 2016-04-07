@@ -10,17 +10,17 @@
     "history": [
       {
         "id": 123,
-        "title": "2016年台湾之行",
+        "title": "2014年台湾之行",
         "coords": null
       },
       {
         "id": 123,
-        "title": "2016年台湾之行",
+        "title": "2015年日本关西",
         "coords": null
       },
       {
         "id": 123,
-        "title": "2016年台湾之行",
+        "title": "2015年川藏线",
         "coords": [
             [118.398167, 31.353617],
             [117.32411,31.891577],
@@ -39,7 +39,7 @@
   {
     "id": 2,
     "basic": {
-      "name": "Jona",
+      "name": "Rick",
       "sex": "female",
       "avatar": "http://7xpm14.com1.z0.glb.clouddn.com/FjOqyP_kATIhWjIHR75q-dBVtmhS",
       "age": 34
@@ -47,17 +47,17 @@
     "history": [
       {
         "id": 123,
-        "title": "2016年台湾之行",
+        "title": "2014年台湾之行",
         "coords": null
       },
       {
         "id": 123,
-        "title": "2016年台湾之行",
+        "title": "2015年日本关西",
         "coords": null
       },
       {
         "id": 123,
-        "title": "2016年台湾之行",
+        "title": "2015年川藏线",
         "coords": [
             [98.398167, 31.353617],
             [97.32411,31.891577],
