@@ -1,0 +1,30 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin-top: 20px;
+}
+#mapContainer {
+  margin: 0 auto;
+  height: 280px;
+  width: 1024px;
+  background: #ccc;
+}
+
+#wayList {
+  margin: 0 auto;
+  width: 1024px;
+}
+
+#wayList .way {
+  height: 85px;
+  margin: 5px 0;
+  background: #ccc;
+}
+
+#wayList .way.active {
+  border: 5px solid green;
+}
+

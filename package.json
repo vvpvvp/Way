@@ -20,6 +20,7 @@
                 "common": [
                     "jquery",
                     "leaflet",
+                    "leaflet/dist/leaflet.css",
                     "handlebars/dist/handlebars"
                 ]
             },
