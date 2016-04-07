@@ -19,7 +19,8 @@
             "commonTrunk": {
                 "common": [
                     "jquery",
-                    "leaflet"
+                    "leaflet",
+                    "handlebars/dist/handlebars"
                 ]
             },
             "global": {

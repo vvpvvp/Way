@@ -1,4 +1,6 @@
 import template from "./js/template";
-console.log(template.userInfo);
-console.log(template.userInfo2);
+import Handlebars from "handlebars/dist/handlebars";
+
+var temp = Handlebars.compile(template.userInfo);
+console.log(temp({a:"测试"}));
 console.log(1);
