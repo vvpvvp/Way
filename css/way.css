@@ -1,5 +1,8 @@
 header{
-	height:500px;
+  position: absolute;
+  top: 0;
+	height:100%;
+  width: 100%;
 	background: #F67676;
 }
 
@@ -7,7 +10,7 @@ header{
   position:absolute;
   left:0;
   width:50%;
-  top:500px;
+  top:100%;
   height:100%;
 }
 #mapContainer {
@@ -15,14 +18,15 @@ header{
 }
 
 #blog{
-	margin: 0 20% 0 50%;
+	margin: 100% 20% 0 50%;
 	background: red;
 }
 
 #timeline {
     position: absolute;
-    top: 500px;
+    top: 100%;
     right: 0;
     width: 200px;
     bottom: 0;
 }
+

@@ -2,11 +2,15 @@ class Control{
 	constructor(){
 		// this.container = $(container);
 		this.init();
+		// this.x = 0
 	}
 
 	init(){
-		$(document).on("mousewheel",function(event){
-			
+		$("#mapContainer").on("mousewheel",function(event){
+			let isUp = event.deltaY<0,isDown = !isUp;
+			// console.log(`isUp:${isUp}`);
+			$("body").scrollTop(document.body.scrollTop-event.deltaY*3);
+			event.preventDefault();
 		});
 	}
 }

@@ -48,7 +48,7 @@ let M = ()=>{
 
     function renderTravelList(datas) {
         let travelInfoTemp = Handlebars.compile(template.travelInfo);
-        $('body').append(travelInfoTemp({ datas: datas }));
+        // $('body').append(travelInfoTemp({ datas: datas }));
     }
 
     bindEvents();
