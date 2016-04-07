@@ -1,4 +1,11 @@
+* {
+  padding: 0;
+  margin: 0;
+}
 
+body {
+  margin-top: 20px;
+}
 #mapContainer {
   margin: 0 auto;
   height: 280px;
