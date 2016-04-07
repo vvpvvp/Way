@@ -6,9 +6,15 @@ let M = ()=> {
 
     function bindEvents() {
         $(document).on('click', '.way', function() {
-            $(event.target).siblings().removeClass('active');
-            $(event.target).addClass('active');
-            let id = $(event.target).attr('id');
+            let $way = $(event.target);
+
+            if(!$(event.target).hasClass('way')) {
+                $way = $way.parents('.way')
+            }
+
+            $way.siblings().removeClass('active');
+            $way.addClass('active');
+            let id = $way.attr('id');
             map.fitBounds(ways[id].getBounds());
         })
     }
