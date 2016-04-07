@@ -1,3 +1,4 @@
+import L from "leaflet";
 function initMap(id) {
     let mapboxId = 'castafiore.k59m8f42',
         mapboxUrl = 'http://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';
