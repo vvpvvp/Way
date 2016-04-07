@@ -1,4 +1,4 @@
-import initMap from '../plugin/map';
+import {initMap, drawPolyline} from '../plugin/map';
 import template from "../template";
 import Handlebars from "handlebars/dist/handlebars";
 let M = ()=> {
@@ -13,24 +13,6 @@ let M = ()=> {
         })
     }
 
-    function drawWay(id, coords) {
-        let polyline, points = [],
-            point;
-        for (var i = coords.length - 1; i >= 0; i--) {
-            point = new L.LatLng(coords[i][1], coords[i][0]);
-            console.log(coords[i][0] + ',' + coords[i][1]);
-            points.push(point);
-        }
-        polyline = L.polyline(points, {
-            color: 'red',
-            weight: 3,
-            opacity: 0.5,
-            smoothFactor: 1
-        }).addTo(map);
-
-        ways[id] = polyline;
-    }
-
     function drawMultipleWays(datas) {
         if (datas.length) {
             let i, history, recent, coords, id;
@@ -40,7 +22,7 @@ let M = ()=> {
                 recent = history[history.length - 1];
                 coords = recent['coords'];
                 id = datas[i]['id'];
-                drawWay(id, coords);
+                ways[id] = drawPolyline(map, coords);
             }
             map.fitBounds(ways[id].getBounds());
         }
