@@ -32,6 +32,7 @@
       },
       "devServer": {}
     },
+<<<<<<< HEAD
     "copy": []
   },
   "dependencies": {
@@ -42,4 +43,40 @@
     "mapbox": "^1.0.0-beta",
     "momentjs": "^1.0.2"
   }
+=======
+    "kil": {
+        "port": 9001,
+        "mock": false,
+        "react": false,
+        "webpack": {
+            "output": {
+                "*.html": {}
+            },
+            "commonTrunk": {
+                "common": [
+                    "jquery",
+                    "leaflet",
+                    "leaflet/dist/leaflet.css",
+                    "handlebars/dist/handlebars",
+                    "bootstrap/dist/js/bootstrap",
+                    "bootstrap/dist/css/bootstrap.min.css"
+                ]
+            },
+            "global": {
+                "$": "jquery",
+                "jQuery": "jquery"
+            },
+            "devServer": {}
+        },
+        "copy": []
+    },
+    "dependencies": {
+        "handlebars": "^4.0.5",
+        "jquery": "^2.2.3",
+        "leaflet": "^0.7.7",
+        "mapbox": "^1.0.0-beta",
+        "momentjs": "^1.0.2",
+        "bootstrap": "^3.3.6"
+    }
+>>>>>>> 98278404ab8c715c442853d09e523f66c2641948
 }
