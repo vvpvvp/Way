@@ -1,14 +1,14 @@
 import template from "./js/template";
 import Handlebars from "handlebars/dist/handlebars";
 import L from "leaflet";
+
 require('./css/index.css');
 
 let temp = Handlebars.compile(template.userInfo);
 console.log(temp({a:"测试"}));
 console.log(1);
 
-
-let map, ways;
+let map, datas, ways = {};
 
 function initMap() {
     let mapboxId = 'castafiore.k59m8f42',
@@ -22,11 +22,12 @@ function bindEvents() {
   $(document).on('click', '.way', function() {
     $(event.target).siblings().removeClass('active');
     $(event.target).addClass('active');
-    map.setView(coords[$(event.target).html()].split(','));
+    let id = $(event.target).attr('id');
+    map.fitBounds(ways[id].getBounds());
   })
 }
 
-function drawWay(coords) {
+function drawWay(id, coords) {
     let polyline, points = [], point;
     for (var i = coords.length - 1; i >= 0; i--) {
         point = new  L.LatLng(coords[i][1], coords[i][0]);
@@ -39,23 +40,36 @@ function drawWay(coords) {
         opacity: 0.5,
         smoothFactor: 1
     }).addTo(map);
-    map.fitBounds(polyline.getBounds());
+
+    ways[id] = polyline;
 }
 
 function drawMultipleWays(datas) {
-    for (let i = datas.length - 1; i >= 0; i--) {
-        let history = datas[i]['history'];
-        let recent = history[history.length - 1];
-        let coords = recent['coords'];
-        drawWay(coords);
+    if(datas.length) {
+        let i, history, recent, coords, id;
 
-        return;
+        for (i = datas.length - 1; i >= 0; i--) {
+            history = datas[i]['history'];
+            recent = history[history.length - 1];
+            coords = recent['coords'];
+            id = datas[i]['id'];
+            drawWay(id, coords);
+        }
+        map.fitBounds(ways[id].getBounds());
     }
+}
+
+function renderTravelList(datas) {
+    let travelInfoTemp = Handlebars.compile(template.travelInfo);
+    $('body').append(travelInfoTemp({datas: datas}));
 }
 
 bindEvents();
 
 $.get('data/ways.json', function(res) {
+    datas = res;
     initMap();
-    drawMultipleWays(res);
+    renderTravelList(datas);
+    drawMultipleWays(datas);
 });
+
