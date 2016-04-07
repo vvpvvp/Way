@@ -36,6 +36,7 @@
         "handlebars": "^4.0.5",
         "jquery": "^2.2.3",
         "leaflet": "^0.7.7",
-        "mapbox": "^1.0.0-beta"
+        "mapbox": "^1.0.0-beta",
+        "momentjs": "^1.0.2"
     }
 }

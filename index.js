@@ -48,7 +48,7 @@ bindEvents();
 initMap();
 
 $.get('data/ways.json', function(res) {
-    drawMultipleWays(res);
+    // drawMultipleWays(res);
 });
 
 
