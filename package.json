@@ -1,0 +1,39 @@
+{
+    "name": "way",
+    "version": "1.0.2",
+    "description": "",
+    "main": "index.js",
+    "author": "alicia",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vvpvvp/Way.git"
+    },
+    "kil": {
+        "port": 9001,
+        "mock": false,
+        "react": false,
+        "webpack": {
+            "output": {
+                "*.html": {}
+            },
+            "commonTrunk": {
+                "common": [
+                    "jquery",
+                    "leaflet"
+                ]
+            },
+            "global": {
+                "$": "jquery",
+                "jQuery": "jquery"
+            },
+            "devServer": {}
+        },
+        "copy": []
+    },
+    "dependencies": {
+        "handlebars": "^4.0.5",
+        "jquery": "^2.2.3",
+        "leaflet": "^0.7.7",
+        "mapbox": "^1.0.0-beta"
+    }
+}
