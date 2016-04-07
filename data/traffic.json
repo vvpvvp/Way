@@ -1,0 +1,15 @@
+{
+	"taxi":"出租车",
+	"bus":"公共汽车",
+	"car":"汽车",
+	"train":"火车",
+	"walk":"走路",
+	"bicycle":"自行车",
+	"ship":"轮船",
+	"motorcycle":"摩托车",
+	"airplane":"飞机",
+	"tractor":"拖拉机",
+	"truck":"卡车",
+	"suv":"越野车",
+	"pickup":"皮卡车"
+}
