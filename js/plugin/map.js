@@ -23,10 +23,7 @@ function initMap(id) {
 }
 
 function addMarker(map, style, title, coord) {
-    let marker = L.marker(coord, {icon: icons[style], title: title}).addTo(map);
-    marker.on('click', function () {
-        $('#floatTip').html($(event.target).attr('title'));
-    })
+    return L.marker(coord, {icon: icons[style], title: title}).addTo(map);
 }
          
 function drawPolyline(map, trip) {

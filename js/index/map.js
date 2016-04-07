@@ -16,6 +16,8 @@ let M = ()=> {
             $way.addClass('active');
             let id = $way.attr('id');
             map.fitBounds(ways[id].getBounds());
+        }).on('click', '.leaflet-marker-icon', function() {
+            $('#floatTip').html($(event.target).attr('title'));
         })
     }
 
