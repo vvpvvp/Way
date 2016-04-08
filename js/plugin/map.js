@@ -1,14 +1,11 @@
 import L from "leaflet";
 
 let icons = {
-    'green': L.icon({
-        iconUrl: 'images/leaf-green.png',
-        shadowUrl: 'images/leaf-shadow.png',
-        iconSize:     [38, 95], // size of the icon
-        shadowSize:   [50, 64], // size of the shadow
-        iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-        shadowAnchor: [4, 62],  // the same for the shadow
-        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    'blue': L.icon({
+        iconUrl: 'images/markers-blue.png', 
+        iconSize: [32, 41],
+        iconAnchor: [17,40],
+        popupAnchor: [16,2]
     })
 }
 function initMap(id) {
@@ -39,7 +36,7 @@ function drawPolyline(map, trip, inProgress) {
 
         if(i == 0 || i == coords.length - 1)  {
             title = (i === 0 ? startEnd[0] : startEnd[1]);
-            addMarker(map, 'green', title, [coords[i][1], coords[i][0]]);
+            addMarker(map, 'blue', title, [coords[i][1], coords[i][0]]);
         }
     }
     polyline = L.polyline(points, {
