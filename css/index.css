@@ -3,6 +3,8 @@
     box-sizing: border-box;
     min-height: 700px;
     overflow: hidden;
+    background: url(/images/mountains-background.jpg)no-repeat center 100px;
+    background-size: contain;
 }
 
 .header-icon {
@@ -129,4 +131,9 @@ p.wayTitle {
     right: 0;
     top: 0;
     bottom: 0;
+}
+
+.header-icon img {
+    height: 100%;
+    width: 100%;
 }

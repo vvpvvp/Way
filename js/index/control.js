@@ -2,6 +2,7 @@ import Map from '../plugin/map';
 import Handlebars from "handlebars/dist/handlebars";
 import template from "../template";
 import moment from "momentjs";
+import Vivus from "vivus";
 class Control{
 	constructor(){
 		// this.container = $(container);
@@ -11,6 +12,10 @@ class Control{
 
 	init(){
 		let C = this;
+		new Vivus('header_icon', {type: 'delayed',
+			    duration: 200,
+			    animTimingFunction: Vivus.EASE,
+			    file: '/images/badge.svg'});
 		// $(document).on("mousewheel",function(event){
 			
 		// });
@@ -23,7 +28,7 @@ class Control{
 
 	getData(){
 		let C = this;
-		Common.A.get("/data/ways.json",(result)=>{
+		Common.A.get("data/ways.json",(result)=>{
 			if(result.status==1){
 				C.data = result;
 				for(let data of C.data.content){
@@ -32,7 +37,7 @@ class Control{
 					content.end = content.plan[content.plan.length-1];
 					let startDate = moment(content.startDate);
 					content.startDateShow = {
-						month:startDate.month(),
+						month:startDate.month()+1,
 						date:startDate.date(),
 						year:startDate.year()
 					};
@@ -58,7 +63,7 @@ class Control{
 
 	onResize(){
 		let _h = $(window).height();
-		$(".header,.travelContainer").height(_h).css("font-size",(_h/700+"em"));
+		$(".header").height(_h).css("font-size",(_h/700+"em"));
 	}
 }
 

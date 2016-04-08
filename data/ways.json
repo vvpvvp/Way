@@ -6,7 +6,7 @@
         "basic": {
             "name": "Jona",
             "sex": "female",
-            "avatar": "http://7xpm14.com1.z0.glb.clouddn.com/FjOqyP_kATIhWjIHR75q-dBVtmhS",
+            "avatar": "/images/avatar.png",
             "age": 34,
             "profession": "插画师"
         },
@@ -107,7 +107,7 @@
         "basic": {
             "name": "Jona",
             "sex": "female",
-            "avatar": "http://7xpm14.com1.z0.glb.clouddn.com/FjOqyP_kATIhWjIHR75q-dBVtmhS",
+            "avatar": "/images/avatar.png",
             "age": 34,
             "profession": "插画师"
         },
@@ -208,7 +208,7 @@
         "basic": {
             "name": "Jona",
             "sex": "female",
-            "avatar": "http://7xpm14.com1.z0.glb.clouddn.com/FjOqyP_kATIhWjIHR75q-dBVtmhS",
+            "avatar": "/images/avatar.png",
             "age": 34,
             "profession": "插画师"
         },

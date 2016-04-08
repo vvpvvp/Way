@@ -23,6 +23,7 @@
           "leaflet/dist/leaflet.css",
           "jquery-mousewheel",
           "momentjs",
+          "vivus",
           "handlebars/dist/handlebars",
           "./js/common"
         ]
@@ -30,7 +31,7 @@
       "global": {
         "$": "jquery",
         "jQuery": "jquery",
-        "Common":"./js/common"
+        "Common": "./js/common"
       },
       "devServer": {}
     },
@@ -42,6 +43,7 @@
     "jquery-mousewheel": "^3.1.13",
     "leaflet": "^0.7.7",
     "mapbox": "^1.0.0-beta",
-    "momentjs": "^1.0.2"
+    "momentjs": "^1.0.2",
+    "vivus": "^0.3.0"
   }
 }
