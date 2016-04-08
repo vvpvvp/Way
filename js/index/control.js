@@ -20,6 +20,8 @@ class Control{
 			
 		// });
 		// $("#header_icon").tooltipster({content:"测试"});
+
+
 		this.getData();
 
 		$(window).on("resize",C.onResize);
@@ -54,9 +56,8 @@ class Control{
 					let map = new Map(mapDom.attr("id"));
 					let drawPoly = map.drawPolyline(content.plan,Map.GREY);
 					map.focus(drawPoly);
+					$(".leaflet-marker-icon").tooltipster();
 				}
-
-		        
 			}
 		});
 	}
