@@ -37,7 +37,7 @@
 .header-word {
     font-size: 29px;
     text-align: center;
-    margin-top: 6em;
+    margin-top: 5em;
 }
 
 .travelContainer {
@@ -136,4 +136,8 @@ p.wayTitle {
 .header-icon img {
     height: 100%;
     width: 100%;
+}
+
+.leaflet-bottom.leaflet-right {
+    display: none;
 }

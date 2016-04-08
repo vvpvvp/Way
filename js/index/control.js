@@ -53,6 +53,7 @@ class Control{
 
 					let map = new Map(mapDom.attr("id"));
 					let drawPoly = map.drawPolyline(content.plan,Map.GREY);
+					map.drawPolyline(content.onway,Map.COLORFUL);
 					map.focus(drawPoly);
 				}
 
