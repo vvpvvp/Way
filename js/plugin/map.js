@@ -7,9 +7,9 @@ class Map {
         this.icons = {
             'blue': L.icon({
                 iconUrl: 'images/markers-blue.png', 
-                iconSize: [32, 41],
-                iconAnchor: [17,40],
-                popupAnchor: [16,2]
+                iconSize: [16, 20],
+                iconAnchor: [9, 20],
+                popupAnchor: [16, 2]
             })
         }
         this.instance = null;
@@ -17,7 +17,7 @@ class Map {
     }
 
     init(){
-        let mapboxId = 'castafiore.k59m8f42',
+        let mapboxId = 'yefei.jdc3fkbg',
         mapboxUrl = 'http://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';
 
         this.instance = L.map(this.container, {
@@ -55,23 +55,25 @@ class Map {
         polyline = L.polyline(points, {
             color: style,
             weight: 3,
-            opacity: 0.5,
+            opacity: 1,
             smoothFactor: 1
         }).addTo(this.instance);
-            this.instance.fitBounds(polyline.getBounds());
 
         return polyline;
     }
 
     focus(ele) {
         if(ele && typeof ele.getBounds === 'function') {
-            console.log(ele.getBounds());
-            this.instance.fitBounds(ele.getBounds());
+            let bounds =  ele.getBounds();
+            // 1072 container width
+            // 380 user info and gap with
+            bounds._northEast.lng += (1072 / (1072 - 400) - 1) * (bounds._northEast.lng - bounds._southWest.lng);
+            this.instance.fitBounds(bounds);
         }
     }
 }
 
-Map.GREY = 'grey';
-Map.COLORFUL = 'blue';
+Map.GREY = '#888888';
+Map.COLORFUL = '#5BE4CB';
 
 export default Map;
