@@ -1,11 +1,7 @@
 .header {
-    position: absolute;
     padding: 6em 0 0 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
     box-sizing: border-box;
+    min-height: 700px;
     overflow: hidden;
 }
 
@@ -19,12 +15,6 @@
 }
 
 .container {
-    position: absolute;
-    top: 100%;
-    height: 100px;
-    left: 0;
-    right: 0;
-    background-color: red;
 }
 
 .greenButton {

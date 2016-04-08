@@ -8,7 +8,7 @@ class Control{
 	}
 
 	init(){
-
+		
 		$("#mapContainer").on("mousewheel",function(event){
 			let isUp = event.deltaY<0,isDown = !isUp;
 			// console.log(`isUp:${isUp}`);

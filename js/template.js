@@ -1,26 +1,26 @@
-export default {
-	"userInfo":
-	`<div>
-		<div>{{a}}</div>
-	</div>`,
 
-	"userInfo2":
-	`<div>
-		<div>2</div>
-	</div>`,
+let userInfo = 
+``;
 
-    'travelInfo': `
-    <div id="wayList">
-        {{#each datas}}
-         <div class="way {{#if @first}}active{{/if}}" id="{{id}}">
-            {{basic.name}}
-            <ul class="pull-right">
-                {{#each history}}
-                    <li><a href="way.html#{{id}}">{{title}}{{#if @last}}ing.....{{/if}}</a></li>
-                {{/each}}
-            </ul>
-         </div>
-        {{/each}}
+let indexInfo = 
+`
+{{#each content}}
+<div class="travelContainer">
+    <span class="startDate"></span>
+    <div class="travelTitle"></div>
+    <div class="mapContainer">
     </div>
-    `
-}
+    <div class="userInfo">
+        <div class="userIcon">
+            <span style="background-image:url({{basic.avatar}})"></span>
+        </div>
+        <p class="userName">{{basic.name}}</p>
+        <p>{{basic.age}}岁&nbsp;{{basic.profession}}</p>
+        <a href="" class="greenButton">More</a>
+    </div>
+</div>
+{{/each}}
+`;
+
+
+export default {userInfo,indexInfo};

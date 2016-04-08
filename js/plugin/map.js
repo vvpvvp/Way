@@ -7,7 +7,7 @@ var mapboxTiles = L.tileLayer('https://api.mapbox.com/v4/mapbox.light/{z}/{x}/{y
 
 var map = L.map(id)
     .addLayer(mapboxTiles,{
-    zoomwheel:false
+    zoomControl: false
 })
     .setView([42.3610, -71.0587], 0);
 

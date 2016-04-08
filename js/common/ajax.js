@@ -37,7 +37,7 @@ let ajax = {
                 params.data = arg;
             }
         }
-        return w.J.ajax(params);
+        return this.ajax(params);
     },
     post: function(url) {
         var params = {};
@@ -57,7 +57,7 @@ let ajax = {
                 params.data = arg;
             }
         }
-        return w.J.ajax(params);
+        return this.ajax(params);
     },
     postJson: function(url, param1, paramJson, successFuc, failureFuc, dataType) {
         return w.J.ajax({
