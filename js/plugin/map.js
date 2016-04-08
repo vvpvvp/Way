@@ -1,64 +1,77 @@
 import L from "leaflet";
 
-let icons = {
-    'blue': L.icon({
-        iconUrl: 'images/markers-blue.png', 
-        iconSize: [32, 41],
-        iconAnchor: [17,40],
-        popupAnchor: [16,2]
-    })
-}
-function initMap(id) {
-    let mapboxId = 'castafiore.k59m8f42',
+class Map {
+    constructor(container){
+        this.container = container;
+        this.$container = $('#' + container);
+        this.icons = {
+            'blue': L.icon({
+                iconUrl: 'images/markers-blue.png', 
+                iconSize: [32, 41],
+                iconAnchor: [17,40],
+                popupAnchor: [16,2]
+            })
+        }
+        this.instance = null;
+        this.init();
+    }
+
+    init(){
+        let mapboxId = 'castafiore.k59m8f42',
         mapboxUrl = 'http://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';
 
-    let map = L.map(id, {center:[30.664789, 104.072941], zoom: 10, zoomControl: false});
-    L.tileLayer(mapboxUrl, {id: mapboxId}).addTo(map);
+        this.instance = L.map(this.container, {
+            center:[40.664789, 104.072941], 
+            zoom: 10, 
+            zoomControl: false, 
+            touchZoom:false, 
+            scrollWheelZoom:false,
+            doubleClickZoom:false
+        });
 
-    $('#mapContainer').append('<div id="floatTip"></div>')
-    return map;
-}
+        L.tileLayer(mapboxUrl, {id: mapboxId}).addTo(this.instance);
+        // this.$container.append('<div id="floatTip"></div>')
+    }
 
-function addMarker(map, style, title, coord) {
-    return L.marker(coord, {icon: icons[style], title: title}).addTo(map);
-}
-         
-function drawPolyline(map, trip, inProgress) {
-    inProgress = !!inProgress;
+    addMarker(style, title, coord) {
+        return L.marker(coord, {icon: this.icons[style], title: title}).addTo(this.instance);
+    }
 
-    let polyline, polyline2, points = [], point, title;
-    let startEnd = [trip.start, trip.end], 
-        coords = trip['coords'];
-                
-    for (var i = coords.length - 1; i >= 0; i--) {
-        point = new L.LatLng(coords[i][1], coords[i][0]);
-        points.push(point);
+    drawPolyline(datas, style) {
+        let polyline, points = [], point, title, i, lat, lng;
 
-        if(i == 0 || i == coords.length - 1)  {
-            title = (i === 0 ? startEnd[0] : startEnd[1]);
-            addMarker(map, 'blue', title, [coords[i][1], coords[i][0]]);
+        for (i = datas.length - 1; i >= 0; i--) {
+            lat = datas[i]['gps'][1];
+            lng = datas[i]['gps'][0];
+            
+            point = new L.LatLng(lat, lng);
+            points.push(point);
+
+            if(datas[i]['location'] && datas[i]['location'].trim() != '')  {
+                this.addMarker('blue', datas[i]['location'].trim(), [lat, lng]);
+            }
+        }
+
+        polyline = L.polyline(points, {
+            color: style,
+            weight: 3,
+            opacity: 0.5,
+            smoothFactor: 1
+        }).addTo(this.instance);
+            this.instance.fitBounds(polyline.getBounds());
+
+        return polyline;
+    }
+
+    focus(ele) {
+        if(ele && typeof ele.getBounds === 'function') {
+            console.log(ele.getBounds());
+            this.instance.fitBounds(ele.getBounds());
         }
     }
-    polyline = L.polyline(points, {
-        color: 'grey',
-        weight: 3,
-        opacity: 0.5,
-        smoothFactor: 1
-    }).addTo(map);
-
-    if(inProgress) {
-        console.log(JSON.stringify(points.slice(0, trip.index)));
-        polyline2 = L.polyline(points.slice(0, trip.index), {
-            color: '#83D2E1',
-            weight: 3,
-            opacity: 1,
-            smoothFactor: 1
-        }).addTo(map);
-    };
-
-    return polyline;
 }
 
+Map.GREY = 'grey';
+Map.COLORFUL = 'blue';
 
-
-export {initMap, drawPolyline};
+export default Map;
