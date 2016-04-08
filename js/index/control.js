@@ -1,3 +1,5 @@
+import Map from '../plugin/map';
+
 class Control{
 	constructor(){
 		// this.container = $(container);
@@ -5,6 +7,8 @@ class Control{
 	}
 
 	init(){
+		
+		// $(".header").height($(window).height());
 		$(document).on("mousewheel",function(event){
 			
 		});

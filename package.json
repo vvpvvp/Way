@@ -21,7 +21,6 @@
           "jquery",
           "leaflet",
           "leaflet/dist/leaflet.css",
-          "./css/common.less",
           "jquery-mousewheel",
           "handlebars/dist/handlebars",
           "./js/common"

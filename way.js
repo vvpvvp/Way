@@ -1,7 +1,11 @@
-import map from './js/way/map';
 import control from './js/way/control';
-require('./css/way.css');
+
+if(WEBPACK_DEBUG){
+	Common.U.loadCss("css/way.css");
+}else{
+	require("../css/way.css");
+}
+
 $(()=>{
-	map();
 	control();
 })

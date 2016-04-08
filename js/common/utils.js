@@ -154,6 +154,14 @@ export default {
             return "<a href='" + link + "' target='_blank'>" + word + "</a>";
         });
         return new_s;
+    },
+    loadCss: function(url){
+        var v = "";
+         var link = document.createElement('link');
+        link.type = 'text/css';
+        link.rel = 'stylesheet';
+        link.href = url + v;
+        document.getElementsByTagName("head")[0].appendChild(link);
     }
 };
 
