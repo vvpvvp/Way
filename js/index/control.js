@@ -1,6 +1,7 @@
 import Map from '../plugin/map';
 import Handlebars from "handlebars/dist/handlebars";
 import template from "../template";
+import moment from "momentjs";
 class Control{
 	constructor(){
 		// this.container = $(container);
@@ -25,14 +26,39 @@ class Control{
 		Common.A.get("/data/ways.json",(result)=>{
 			if(result.status==1){
 				C.data = result;
+				for(let data of C.data.content){
+					let content = data.way;
+					content.start = content.onway[0];
+					content.end = content.plan[content.plan.length-1];
+					let startDate = moment(content.startDate);
+					content.startDateShow = {
+						month:startDate.month(),
+						date:startDate.date(),
+						year:startDate.year()
+					};
+					content.now = content.onway[content.onway.length-1];
+				}
+
 		        let travelInfoTemp = Handlebars.compile(template.indexInfo);
 		        $('.container').append(travelInfoTemp(C.data));
+
+				for(let [i,data] of C.data.content.entries()){
+					let content = data.way;
+					let mapDom = $("#mapContainer_" + i);
+
+					let map = new Map(mapDom.attr("id"));
+					let drawPoly = map.drawPolyline(content.plan,Map.GREY);
+					map.focus(drawPoly);
+				}
+
+		        
 			}
 		});
 	}
 
 	onResize(){
-		$(".header").height($(window).height());
+		let _h = $(window).height();
+		$(".header,.travelContainer").height(_h).css("font-size",(_h/700+"em"));
 	}
 }
 

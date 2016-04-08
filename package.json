@@ -22,6 +22,7 @@
           "leaflet",
           "leaflet/dist/leaflet.css",
           "jquery-mousewheel",
+          "momentjs",
           "handlebars/dist/handlebars",
           "./js/common"
         ]

@@ -15,6 +15,8 @@
 }
 
 .container {
+    padding: 0px 150px 200px;
+    position: relative;
 }
 
 .greenButton {
@@ -33,5 +35,98 @@
 .header-word {
     font-size: 20px;
     text-align: center;
-    margin-top: 4em;
+    margin-top: 5em;
+}
+
+.travelContainer {
+    margin: 15em 0 0 0;
+    box-sizing: border-box;
+    position: relative;
+    background-color: #3B4B59;
+    height: 560px;
+}
+
+
+.userInfo {
+    position: absolute;
+    right: 40px;
+    top: 40px;
+    bottom: 40px;
+    border-radius: 2px;
+    width: 340px;
+    background-color: #FFF;
+    box-shadow: 0 0 40px 0 rgba(107, 107, 107, 0.37);
+}
+
+.userIcon {
+    margin-top: 50px;
+    text-align: center;
+}
+
+span {}
+
+.userIcon>span {
+    display: block;
+    width: 120px;
+    height: 120px;
+    background-size: contain;
+    border-radius: 60px;
+    margin: 0 auto;
+}
+
+.userInfo p.userName {
+    font-size: 20px;
+    text-align: center;
+    margin: 20px 0 10px;
+}
+
+.userInfo .greenButton {
+    position: absolute;
+    bottom: 90px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+
+.startDate {
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    top: -40px;
+    padding: 16px 0;
+    background-color: #1EC474;
+    color: #FFF;
+    line-height: 24px;
+    text-align: center;
+    left: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    font-family: cursive;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+p.wayTitle {
+    text-align: center;
+    font-size: 27px;
+    margin-top: 5px;
+}
+
+.travelTitle {
+    color: #FFF;
+    margin-left: 140px;
+    padding-top: 8px;
+    font-size: 15px;
+    position: absolute;
+    z-index: 10;
+}
+
+.mapContainer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
