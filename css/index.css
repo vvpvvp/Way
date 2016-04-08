@@ -35,9 +35,9 @@
 }
 
 .header-word {
-    font-size: 20px;
+    font-size: 29px;
     text-align: center;
-    margin-top: 5em;
+    margin-top: 6em;
 }
 
 .travelContainer {
@@ -79,7 +79,7 @@ span {}
 .userInfo p.userName {
     font-size: 20px;
     text-align: center;
-    margin: 20px 0 10px;
+    margin: 20px 0 4px;
 }
 
 .userInfo .greenButton {

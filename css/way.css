@@ -1,32 +1,31 @@
-header{
-  position: absolute;
-  top: 0;
-	height:100%;
-  width: 100%;
-	background: #F67676;
-}
-
 .mapContainerDiv{
   position:absolute;
   left:0;
   width:50%;
-  top:100%;
+  top: 0;
   height:100%;
+  background-color: #eee;
 }
 #mapContainer {
 	height: 100%;
 }
 
 #blog{
-	margin: 100% 20% 0 50%;
-	background: red;
+	position: absolute;
+	right: 0;
+	width: 50%;
+	top: 80px;
+	bottom: 0;
 }
 
 #timeline {
     position: absolute;
-    top: 100%;
+    top: 0;
     right: 0;
-    width: 200px;
-    bottom: 0;
+    left: 0;
+    box-shadow: 1px 0 6px 0 #CDCDCD;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.42);
+    z-index: 2;
 }
 

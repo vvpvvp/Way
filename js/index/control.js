@@ -19,7 +19,7 @@ class Control{
 		// $(document).on("mousewheel",function(event){
 			
 		// });
-
+		// $("#header_icon").tooltipster({content:"测试"});
 		this.getData();
 
 		$(window).on("resize",C.onResize);
