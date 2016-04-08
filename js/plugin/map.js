@@ -58,15 +58,17 @@ class Map {
             opacity: 1,
             smoothFactor: 1
         }).addTo(this.instance);
-            this.instance.fitBounds(polyline.getBounds());
 
         return polyline;
     }
 
     focus(ele) {
         if(ele && typeof ele.getBounds === 'function') {
-            console.log(ele.getBounds());
-            this.instance.fitBounds(ele.getBounds());
+            let bounds =  ele.getBounds();
+            // 1072 container width
+            // 380 user info and gap with
+            bounds._northEast.lng += (1072 / (1072 - 400) - 1) * (bounds._northEast.lng - bounds._southWest.lng);
+            this.instance.fitBounds(bounds);
         }
     }
 }
