@@ -28,7 +28,5 @@ let indexInfo =
 {{/each}}
 `;
 
-        // <p class="dark text-center font16">{{way.start.location}}&nbsp;To&nbsp;{{way.end.location}}</p>
-// <div class="travelTitle">&nbsp; Current&nbsp;{{way.now.location}}&nbsp</div>
 
 export default {userInfo,indexInfo};
