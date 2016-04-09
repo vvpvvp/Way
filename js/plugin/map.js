@@ -7,8 +7,8 @@ class Map {
         this.icons = {
             'blue': L.icon({
                 iconUrl: 'images/markers-blue.png', 
-                iconSize: [16, 20],
-                iconAnchor: [9, 20],
+                iconSize: [14, 14],
+                iconAnchor: [8, 8],
                 popupAnchor: [16, 2]
             })
         }
@@ -54,7 +54,7 @@ class Map {
 
         polyline = L.polyline(points, {
             color: style,
-            weight: 3,
+            weight: 4,
             opacity: 1,
             smoothFactor: 1
         }).addTo(this.instance);

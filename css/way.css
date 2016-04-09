@@ -16,6 +16,7 @@
 	width: 50%;
 	top: 80px;
 	bottom: 0;
+	/* overflow-y: auto; */
 }
 
 #timeline {
@@ -29,3 +30,138 @@
     z-index: 2;
 }
 
+
+
+
+
+
+.userInfo {line-height: 2.3;}
+
+.userIcon {
+    /* margin-top: 60px; */
+    text-align: center;
+}
+
+.userIcon>span {
+    display: block;
+    width: 120px;
+    height: 120px;
+    background-size: contain;
+    border-radius: 60px;
+    margin: 0 auto;
+}
+
+.userInfo p.userName {
+    font-size: 20px;
+    text-align: center;
+    margin: 20px 0 0px;
+}
+
+
+div#blog>div>div {
+    padding-bottom: 100px;
+}
+
+#mouse-next {
+    position: absolute;
+    opacity: 0;
+    bottom: 10px;
+    width: 40px;
+    margin: 0 auto;
+    left: 0;
+    background: url(/images/mouse@2x.png) no-repeat;
+    height: 50px;
+    background-size: contain;
+    right: 0;
+}
+
+.container {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    bottom: 0;
+}
+.userInfo {
+	overflow-y: auto;
+	position:absolute;
+	left:0;
+	right:0;
+	bottom:0;
+	top: 0;
+	display: none;
+	padding-top: 60px;
+}
+span#mouse-next.show {
+    opacity: 1;
+}
+
+.momentInfo {
+	display:none;
+	padding: 20px 50px;
+	font-size: 15px;
+	opacity: 0;
+	overflow-y: auto;
+	position:absolute;
+	left:0;
+	right:0;
+	bottom:0;
+	top:0;
+}
+
+.from-start{
+	transform: translate3d(0,0, 0);
+}
+
+.from-end.down{
+	transform: translate3d(0, 100%, 0);
+}
+
+.from-end{
+	transform: translate3d(0, -100%, 0);
+}
+
+.to-start{
+	transform: translate3d(0, 100%, 0);
+}
+
+.to-end{
+	transform: translate3d(0,0, 0);
+}
+
+.to-start.down{
+	transform: translate3d(0, -100%, 0);
+}
+
+.to-end.down{
+	transform: translate3d(0,0, 0);
+}
+
+.show{
+	opacity: 1;
+	display: block;
+}
+
+.transform{
+	transition:all 1s;
+}
+
+.description {
+    /* font-size: 14px; */
+}
+
+.momentInfo .images>img {
+    /* width: 40%; */
+    height: 300px;
+    float: left;
+    margin: 0 5% 20px 0;
+    display: inline-block;
+    background-color: #F8F8F8;
+    background-size: contain;
+}
+
+.momentInfo .images {
+    overflow: hidden;
+    padding: 10px 0 0px;
+}

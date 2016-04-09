@@ -28,36 +28,61 @@ class Control{
 		C.onResize();
 	}
 
+
+
+	dealData(){
+		let C = this;
+
+		for(let data of C.data.content){
+			let content = data.way;
+			content.start = content.onway[0];
+			content.end = content.plan[content.plan.length-1];
+			let startDate = moment(content.startDate);
+			content.startDateShow = {
+				month:startDate.month()+1,
+				date:startDate.date(),
+				year:startDate.year()
+			};
+			content.now = content.onway[content.onway.length-1];
+
+			for(let [i,w] of content.onway.entries()){
+				if(i!=content.onway.length-1){
+					delete w.location;
+				}
+			}
+
+			for(let [i,w] of content.plan.entries()){
+				if(i!=content.plan.length-1&&i!=0){
+					delete w.location;
+				}
+			}
+		}
+	}
+
+	drawPoly(i,data){
+		let C = this;
+
+		let content = data.way;
+		let mapDom = $("#mapContainer_" + i);
+
+		let map = new Map(mapDom.attr("id"));
+		let drawPoly = map.drawPolyline(content.plan,Map.GREY);
+		map.drawPolyline(content.onway,Map.COLORFUL);
+		map.focus(drawPoly);
+		$(".leaflet-marker-icon").tooltipster();
+	}
+
 	getData(){
 		let C = this;
 		Common.A.get("data/ways.json",(result)=>{
 			if(result.status==1){
 				C.data = result;
-				for(let data of C.data.content){
-					let content = data.way;
-					content.start = content.onway[0];
-					content.end = content.plan[content.plan.length-1];
-					let startDate = moment(content.startDate);
-					content.startDateShow = {
-						month:startDate.month()+1,
-						date:startDate.date(),
-						year:startDate.year()
-					};
-					content.now = content.onway[content.onway.length-1];
-				}
-
+				C.dealData();
 		        let travelInfoTemp = Handlebars.compile(template.indexInfo);
 		        $('.container').append(travelInfoTemp(C.data));
 
 				for(let [i,data] of C.data.content.entries()){
-					let content = data.way;
-					let mapDom = $("#mapContainer_" + i);
-
-					let map = new Map(mapDom.attr("id"));
-					let drawPoly = map.drawPolyline(content.plan,Map.GREY);
-					map.drawPolyline(content.onway,Map.COLORFUL);
-					map.focus(drawPoly);
-					$(".leaflet-marker-icon").tooltipster();
+					C.drawPoly(i,data);
 				}
 			}
 		});
