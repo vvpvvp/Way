@@ -54,15 +54,9 @@ class Control{
 					let mapDom = $("#mapContainer_" + i);
 
 					let map = new Map(mapDom.attr("id"));
-					let drawPoly = map.drawPolyline(content.plan,Map.GREY);
+					let drawPoly = map.drawPolyline(content.plan, Map.GREY);
 					map.focus(drawPoly);
 					$(".leaflet-marker-icon").tooltipster();
-
-					// let gps_from = [31.353617, 118.398167], gps_to = [31.891577, 117.32411];
-					// let marker = map.addMarker({gps: gps_from, style: Map.MARKER_ORANGE});
-					// let seconds = 12;
-					// marker.move(gps_to, seconds, function(){console.log('moving done')});
-					// marker.move(gps_to);
 				}
 			}
 		});
