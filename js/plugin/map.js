@@ -5,15 +5,19 @@ class Marker {
         this.instance = instance;
     }    
 
-    move(from, to, seconds, callback) {
+    move(to, seconds, callback) {
         callback = callback || function() {};
 
         let _s, _to, isGo = (arguments && arguments.length == 1 &&  arguments[0] instanceof Array);
-
+        let _this = this;
         _s = isGo ? 0 : seconds;
         _to = isGo ? arguments[0] : to;
         $(this.instance._icon).css({transition: (_s + 's')});
-        this.instance.setLatLng(_to);
+
+        setTimeout(function() { // to prevent transition delay
+            _this.instance.setLatLng(_to);
+        }, 0);
+
         callback.call(this);
     }
 }
