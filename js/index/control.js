@@ -16,6 +16,14 @@ class Control{
 			    duration: 200,
 			    animTimingFunction: Vivus.EASE,
 			    file: '/images/badge.svg'});
+
+		
+		new Vivus('footer_icon', {type: 'delayed',
+			    duration: 200,
+			    animTimingFunction: Vivus.EASE,
+			    file: '/images/footer.svg'});
+
+		
 		// $(document).on("mousewheel",function(event){
 			
 		// });
@@ -65,11 +73,11 @@ class Control{
 		let content = data.way;
 		let mapDom = $("#mapContainer_" + i);
 
-		let map = new Map(mapDom.attr("id"));
-		let drawPoly = map.drawPolyline(content.plan,Map.GREY);
-		map.drawPolyline(content.onway,Map.COLORFUL);
-		map.focus(drawPoly);
-		$(".leaflet-marker-icon").tooltipster();
+		let map = new Map(mapDom.attr("id"),content);
+		// let drawPoly = map.drawPolyline(content.plan,Map.GREY);
+		// map.drawPolyline(content.onway,Map.COLORFUL);
+		// map.focus(drawPoly);
+		// $(".leaflet-marker-icon").tooltipster();
 	}
 
 	getData(){

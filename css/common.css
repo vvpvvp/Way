@@ -33,6 +33,17 @@ a:hover {
     text-decoration: none;
 }
 
+
+.clear {
+    clear: both;
+}
+
+.clear::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
 input[required]:invalid,
 input:focus:invalid,
 textarea[required]:invalid,

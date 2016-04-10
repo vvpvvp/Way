@@ -19,6 +19,7 @@
       "commonTrunk": {
         "common": [
           "jquery",
+          "d3",
           "tooltipster",
           "./css/tooltipster.css",
           "leaflet",
@@ -33,6 +34,7 @@
       },
       "global": {
         "$": "jquery",
+        "d3": "d3",
         "jQuery": "jquery",
         "Common": "./js/common"
       },
@@ -50,6 +52,7 @@
     "momentjs": "^1.0.2",
     "tipsy": "^1.0.0",
     "tooltipster": "^1.0.9",
-    "vivus": "^0.3.0"
+    "vivus": "^0.3.0",
+    "d3": "^3.5.16"
   }
 }

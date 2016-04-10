@@ -27,7 +27,18 @@ let indexInfo =
 {{/each}}
 `;
 
-let timeLine = "";
+let timeLine = `
+<div class="clear">
+    {{#each days}}
+        <div class="timelines">
+            <span class="timeSeperate">{{showDate}}</span>
+            {{#each data}}
+            <span class="time" title="{{dateTime}} {{location}}" index="{{index}}"></span>
+            {{/each}}
+        </div>
+    {{/each}}
+</div>
+`;
 
 let detailInfo =
     `
@@ -68,4 +79,4 @@ let detailInfo =
 `;
 
 
-export default { userInfo, indexInfo, detailInfo };
+export default { userInfo, indexInfo, detailInfo,timeLine};
