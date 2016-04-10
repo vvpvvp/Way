@@ -1,32 +1,16 @@
 import L from "leaflet";
-class Marker {
-    constructor(map, instance) {
-        this.map = map;
-        this.instance = instance;
-    }    
 
-    move(to, duration, callback) {
-        callback = callback || function() {};
-
-        let _s, _to, isGo = (arguments && arguments.length == 1 &&  arguments[0] instanceof Array);
-        let _this = this;
-        _s = isGo ? 0 : duration / 1000;
-        _to = isGo ? arguments[0] : to;
-        $(this.instance._icon).css({transition: (_s + 's')});
-
-        setTimeout(function() { // to prevent transition delay
-            _this.instance.setLatLng(_to);
-        }, 0);
-
-        callback.call(this);
-    }
-}
 
 class Map {
-    constructor(container){
+    constructor(container, datas, options){
         this.container = container;
-        this.$container = $('#' + container);
-        this.markers = {};
+        this.datas = datas;
+        this.user_marker = options ? options.user_marker : false;
+        this.polyline_animated = options ? options.polyline_animated : false;
+        this.zoom = options ? options.zoom : false;
+        this.plan_polyline = null;
+        this.onway_polyline = null;
+        this.timeout = null;
         this.icons = {
             'blue': L.icon({
                 iconUrl: 'images/markers-blue.png', 
@@ -40,20 +24,27 @@ class Map {
                 iconAnchor: [9, 20],
                 popupAnchor: [16, 2]
             })
+
+            current@2x.png
         }
         this.instance = null;
         this.d3path = null;
         this.allowZoom = false,
         this.svg = null;
         this.init();
-
     }
     
-    transition(e) {
+    transition(e, mapThis) {
         let that = this;
+        console.log(this);
         this.transition()
             .duration(function(d){
-                return parseInt(d.features[0]['properties']['duration'] || 1000);
+                return Map.ANIMATED_DURATION;
+            })
+            .each("end", function (d) {
+                $(mapThis.plan_polyline._path).attr('stroke-opacity', 1)
+                $(mapThis.onway_polyline._path).attr('stroke-opacity', 1)
+                d3.selectAll('.animatedPath').remove();
             })
             // TODO
             // .delay(function(d) { 
@@ -87,27 +78,102 @@ class Map {
 
         let width = $('.mapContainer').width();
         let height = $('.mapContainer').height();
+        let gps, lng, lat;
 
         this.svg = d3.select(this.instance.getPanes().overlayPane).append("svg")
             .attr('width', width)
             .attr('height', height);
+
+        this.plan_polyline = this.drawPolyline(this.datas.plan, Map.GREY);
+        this.onway_polyline = this.drawPolyline(this.datas.onway, Map.COLORFUL);
+
+        if(this.user_marker)  {
+            gps = this.datas.onway[0]['gps'];
+            lng = gps[0];
+            lat = gps[1];
+            this.marker = this.addMarker({gps: [lat, lng], style: Map.MARKER_ORANGE});
+        }
+
+        this.focus(this.plan_polyline);
     }
 
+    pack4Points(place) {
+        let index = this.datas.onway.indexOf(place);
+        let points = [place];
+        let offset = 1;
+        let roundNumber = 3;
+
+        while(points.length < roundNumber) {
+            if(points.length < roundNumber && index + offset <= this.datas.onway.length -1)
+                points.push(this.datas.onway[index + offset]);
+            if(points.length < roundNumber && index - offset >= 0)
+                points.unshift(this.datas.onway[index - offset]);
+            offset ++;
+        }
+        return points;
+    }
+    go(place) {
+        let lng = place['gps'][0], lat = place['gps'][1];
+        this.marker.setLatLng([lat,lng]);
+    }
+
+    move(place, duration, callback) {
+        callback = callback || function() {};
+
+        if(!this.user_marker) return;
+        if(this.timeout) return;
+
+        
+        let places = this.pack4Points(place);
+        let points = [];
+        let l_lng, l_lat;
+        let l_duration, l_destination;
+        let _this = this;
+
+        for (let i = 0; i < places.length; i++) {
+            l_lng = places[i]['gps'][0];
+            l_lat = places[i]['gps'][1];
+            points.push([l_lat, l_lng]);
+        }
+
+        if(arguments && arguments.length == 1 &&  arguments[0] instanceof Array) {
+            l_duration = 0;
+            l_destination = arguments[0];
+        }
+        else {
+            l_lng = place['gps'][0], l_lat = place['gps'][1]; 
+            l_duration = duration / 1000;
+            l_destination = [l_lat, l_lng];
+        }
+
+        setTimeout(function() {
+            $(_this.marker._icon).css({transition: (l_duration + 's')});
+            _this.marker.setLatLng(l_destination);
+        }, 0);
+
+        _this.timeout = setTimeout(function() {
+            clearTimeout(_this.timeout);
+            _this.timeout = null;
+            $(_this.marker._icon).css({transition: '0s'});
+            if(_this.zoom)
+                _this.instance.fitBounds(points);
+            callback.call(_this);
+        }, duration);
+    }    
 
     addMarker(options) {
         let coord = options['gps'];
         let style = options['style'] || 'blue';
         let title = options['title'] || '';
-        let l_marker = L.marker(coord, {icon: this.icons[style], title: title}).addTo(this.instance);
-        
-        return  (new Marker(this.instance, l_marker));
+
+        return L.marker(coord, {icon: this.icons[style], title: title}).addTo(this.instance);
     }
 
-    drawD3Line(options, gps_list) {
+    drawD3Line(style, gps_list) {
         let geo_data = {
             "type": "FeatureCollection",
             "features": [
-                {"type":"Feature","properties": options,"geometry":{"type":"LineString","coordinates":gps_list}}
+                {"type":"Feature","properties": {style: style},"geometry":{"type":"LineString","coordinates":gps_list}}
             ]
         };
 
@@ -115,7 +181,8 @@ class Map {
         let trip = this.svg.selectAll('path' + parseInt(Math.random(1) * 10000))
             .data([geo_data])
             .enter().append("path")
-            .attr("stroke", options['style'])
+            .attr('class','animatedPath')
+            .attr("stroke", style)
             .attr("fill", "transparent")
             .attr("stroke-width", 3)
             .attr("opacity", 1);
@@ -153,17 +220,16 @@ class Map {
         // }
 
         trip.attr("d", d3path);
-        trip.call(this.transition);
+        trip.call(this.transition, that);
 
     }
 
-    drawPolyline(datas, options) {
+    drawPolyline(datas, style) {
         let polyline, points = [], point, title, i, lat, lng, _options, gps_list = [];
-        let l_opacity = 1, l_style = options;
 
         for (i = 0; i <= datas.length - 1; i++) {
-            lat = datas[i]['gps'][1];
             lng = datas[i]['gps'][0];
+            lat = datas[i]['gps'][1];
             
             point = new L.LatLng(lat, lng);
             points.push(point);
@@ -183,26 +249,20 @@ class Map {
             - draw the leaflet polyline with opacity == 1
         */
 
-        if(options instanceof Object) {
-            l_opacity = 0;
-            l_style = options['style'];
-
-            let that = this;
-
-            setTimeout(function() {
-                that.drawD3Line(options, gps_list);
-            }, options.delay);
+        if(this.polyline_animated) {
+            this.drawD3Line(style, gps_list);
         }
 
         polyline = L.polyline(points, {
-            color: l_style,
+            color: style,
             weight: 3,
-            opacity: l_opacity,
+            opacity: this.polyline_animated ? 0 : 1,
             smoothFactor: 1
         }).addTo(this.instance);
 
         return polyline;
     }
+
 
     focus(ele) {
         if(ele && typeof ele.getBounds === 'function') {
@@ -213,11 +273,16 @@ class Map {
             this.instance.fitBounds(bounds);
         }
     }
+
+    zoomout() {
+        this.instance.fitBounds(this.plan_polyline);
+    }
 }
 
 Map.GREY = '#888888';
 Map.COLORFUL = '#5BE4CB';
 Map.MARKER_ORANGE = 'orange';
 Map.MARKER_BLUE = 'blue';
+Map.ANIMATED_DURATION = 2000;
 
 export default Map;

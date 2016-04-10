@@ -2,31 +2,32 @@
 On The Way demo
 
 
+### Map(id, datas, options)
 
-### Move API use examples
+- id: container id
+- datas:  sample -> {'plan':[{}],'onway': [{}] }
+- options: sample -> {user_marker: boolean, polyline_animated: boolean, zoom: boolean}
+    - user_marker: default false, would add a marker for the user position
+    - polyline_animated: default false, would draw the both polyline polyline_animated
+    - zoom: default false, the move would zoom on differrent area
 
-```
-let gps_from = [31.353617, 118.398167], gps_to = [31.891577, 117.32411];
-let marker = map.addMarker({gps: gps_from, style: Map.MARKER_ORANGE});
-let duration = 10000; // millionseconds
+NOTICE: if wanna to use zoom feature, make sure the object in onway has 'day' attribute
 
-// move the marker to specified coordination
-marker.move(gps_to, duration, function(){console.log('moving done')});
-
-// move the marker directly
-marker.move(gps_to);
-```
-
-### Dynamic draw polyline exampes
+##### examples
 
 ```
-// draw grey polyline
-let drawPoly = map.drawPolyline(content.plan, Map.GREY); 
+let map = new Map(id, datas);
+let map = new Map(id, datas, {user_marker: true, polyline_animated: true, zoom: true});
+```
 
-// draw colorful polyline
-let drawPoly = map.drawPolyline(content.plan, Map.COLORFUL);
+### map.move/map.go 
 
-// draw polyline with animation: include delay and duration
-let drawPoly = map.drawPolyline(content.plan, {duration: 1000, delay: 0, style: Map.GREY});
-map.drawPolyline(content.plan, {duration: 1000, delay: 1200, style: Map.COLORFUL});
+```
+let map = new Map(id, content);
+let place = content.onway[5]; // lat, lng
+
+setTimeout(function() {
+    map.move(place, 1000, function(){console.log('moving done')});
+    // map.go(place);
+}, 3000);
 ```

@@ -52,10 +52,8 @@ class Control{
 				for(let [i,data] of C.data.content.entries()){
 					let content = data.way;
 					let mapDom = $("#mapContainer_" + i);
+					let map = new Map(mapDom.attr("id"), content);
 
-					let map = new Map(mapDom.attr("id"));
-					let drawPoly = map.drawPolyline(content.plan, Map.GREY);
-					map.focus(drawPoly);
 					$(".leaflet-marker-icon").tooltipster();
 				}
 			}
