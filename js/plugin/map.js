@@ -24,8 +24,6 @@ class Map {
                 iconAnchor: [9, 20],
                 popupAnchor: [16, 2]
             })
-
-            current@2x.png
         }
         this.instance = null;
         this.d3path = null;
