@@ -2,7 +2,7 @@ import Map from '../plugin/map';
 import Handlebars from "handlebars/dist/handlebars";
 import template from "../template";
 import moment from "momentjs";
-require("../../css/animate.min.css");
+// require("../../css/animate.min.css");
 class Control{
 	constructor(){
 		// this.container = $(container);
@@ -65,7 +65,7 @@ class Control{
 
 	loadImages(){
 		let C = this;
-		$(".images>img",C.page).each(function(i,n){
+		$(".images img",C.page).each(function(i,n){
 			let _n = $(n);
 			if(!_n.data("havepic")){
 				n.src = _n.attr("vsrc");
@@ -114,12 +114,28 @@ class Control{
 		let content = C.data.way;
 		content.start = content.onway[0];
 		content.end = content.plan[content.plan.length-1];
-		// let startDate = moment(content.startDate);
+		// let startDateShow = moment(content.startDate).format("k");
 		// content.startDateShow = {
 		// 	month:startDate.month()+1,
 		// 	date:startDate.date(),
 		// 	year:startDate.year()
 		// };
+
+
+		for(let [i,w] of content.onway.entries()){
+
+			w.startDateShow = moment(w.startDate).format("k");
+			// if(i!=content.onway.length-1){
+			// 	delete w.location;
+			// }
+		}
+
+		for(let [i,w] of content.plan.entries()){
+			if(i!=content.plan.length-1&&i!=0){
+				delete w.location;
+			}
+		}
+
 		content.now = content.onway[content.onway.length-1];
 	}
 
@@ -149,8 +165,9 @@ class Control{
 				// 	let content = data.way;
 				// 	let mapDom = $("#mapContainer_" + i);
 
-				// 	let map = new Map(mapDom.attr("id"));
-				// 	let drawPoly = map.drawPolyline(content.plan,Map.GREY);
+					let map = new Map("mapContainer");
+					let drawPoly = map.drawPolyline(C.data.way.plan,Map.GREY);
+					let drawPoly = map.drawPolyline(C.data.way.onway,Map.COLORFUL);
 				// 	map.drawPolyline(content.onway,Map.COLORFUL);
 				// 	map.focus(drawPoly);
 				// 	$(".leaflet-marker-icon").tooltipster();

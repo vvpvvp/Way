@@ -54,7 +54,9 @@ let detailInfo =
     <div class="icons"><span class="emotion_{{feeling}}"></span><span class="weather_{{weather}}"><span class="traffic_{{traffic}}"></span></div>
     <div class="images">
         {{#each images}}
-        <img vsrc="{{this}}" alt="{{location}}" />
+        <a href="{{this}}" data-lightbox="roadtrip" title="{{location}}">
+        <img vsrc="{{this}}" alt="{{location}}"/>
+        </a>
         {{/each}}
     </div>
     <div class="description">

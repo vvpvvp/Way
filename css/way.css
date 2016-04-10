@@ -151,7 +151,7 @@ span#mouse-next.show {
     /* font-size: 14px; */
 }
 
-.momentInfo .images>img {
+.momentInfo .images img {
     /* width: 40%; */
     height: 300px;
     float: left;

@@ -1,18 +1,48 @@
 import L from "leaflet";
+class Marker {
+    constructor(map, instance) {
+        this.map = map;
+        this.instance = instance;
+    }    
+
+    move(to, seconds, callback) {
+        callback = callback || function() {};
+
+        let _s, _to, isGo = (arguments && arguments.length == 1 &&  arguments[0] instanceof Array);
+        let _this = this;
+        _s = isGo ? 0 : seconds;
+        _to = isGo ? arguments[0] : to;
+        $(this.instance._icon).css({transition: (_s + 's')});
+
+        setTimeout(function() { // to prevent transition delay
+            _this.instance.setLatLng(_to);
+        }, 0);
+
+        callback.call(this);
+    }
+}
 
 class Map {
     constructor(container){
         this.container = container;
         this.$container = $('#' + container);
+        this.markers = {};
         this.icons = {
             'blue': L.icon({
                 iconUrl: 'images/markers-blue.png', 
                 iconSize: [14, 14],
                 iconAnchor: [8, 8],
                 popupAnchor: [16, 2]
+            }),
+            'orange': L.icon({
+                iconUrl: 'images/markers-orange.png', 
+                iconSize: [16, 20],
+                iconAnchor: [9, 20],
+                popupAnchor: [16, 2]
             })
         }
         this.instance = null;
+        this.allowZoom = false,
         this.init();
     }
 
@@ -22,25 +52,32 @@ class Map {
 
         this.instance = L.map(this.container, {
             center:[40.664789, 104.072941], 
-            zoom: 10, 
+            zoom: 5, 
             zoomControl: false, 
-            touchZoom:false, 
-            scrollWheelZoom:false,
-            doubleClickZoom:false
+            touchZoom:this.allowZoom, 
+            scrollWheelZoom:this.allowZoom,
+            doubleClickZoom:this.allowZoom
         });
 
         L.tileLayer(mapboxUrl, {id: mapboxId}).addTo(this.instance);
         // this.$container.append('<div id="floatTip"></div>')
     }
 
-    addMarker(style, title, coord) {
-        return L.marker(coord, {icon: this.icons[style], title: title}).addTo(this.instance);
+
+    addMarker(options) {
+        let coord = options['gps'];
+        let style = options['style'] || 'blue';
+        let title = options['title'] || '';
+        let l_marker = L.marker(coord, {icon: this.icons[style], title: title}).addTo(this.instance);
+        
+        return  (new Marker(this.instance, l_marker));
     }
 
     drawPolyline(datas, style) {
-        let polyline, points = [], point, title, i, lat, lng;
+        let polyline, points = [], point, title, i, lat, lng, options;
 
-        for (i = datas.length - 1; i >= 0; i--) {
+
+        for (i = 0; i <= datas.length - 1; i++) {
             lat = datas[i]['gps'][1];
             lng = datas[i]['gps'][0];
             
@@ -48,7 +85,8 @@ class Map {
             points.push(point);
 
             if(datas[i]['location'] && datas[i]['location'].trim() != '')  {
-                this.addMarker('blue', datas[i]['location'].trim(), [lat, lng]);
+                options = {'gps': [lat, lng], style: 'blue', title: datas[i]['location'].trim()};
+                this.addMarker(options);
             }
         }
 
@@ -75,5 +113,7 @@ class Map {
 
 Map.GREY = '#888888';
 Map.COLORFUL = '#5BE4CB';
+Map.MARKER_ORANGE = 'orange';
+Map.MARKER_BLUE = 'blue';
 
 export default Map;
