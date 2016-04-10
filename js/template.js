@@ -62,7 +62,7 @@ let detailInfo =
 <div class="momentInfo" id="momentInfo_{{@index}}">
     <div>
     <div class="dark">{{dateShow}}&nbsp;&nbsp;&nbsp;&nbsp;{{location}}</div>
-    <div class="icons"><span class="emotion_{{feeling}}"></span><span class="weather_{{weather}}"><span class="traffic_{{traffic}}"></span></div>
+    <div class="icons"><span class="emotion_{{feeling}}"></span><span class="weather_{{weather}}"></span><span class="traffic_{{traffic}}"></span></div>
     <div class="images">
         {{#each images}}
         <a href="{{this}}" data-lightbox="roadtrip" title="{{location}}">

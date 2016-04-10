@@ -58,14 +58,14 @@ class Control {
         let C = this;
         C.togglePage(C.page, $("#momentInfo_" + C.index), type);
         C.map.move(C.index, 1000);
-        C.doms.timelines.filter(".focused").removeClass("focused").tooltipster('hide').off("mouseout",preventDefault);
-        let NowTimeLet = C.doms.timelines.filter("[index='"+C.index+"']");
+        C.doms.timelines.filter(".focused").removeClass("focused").tooltipster('hide').off("mouseover mouseout",preventDefault);
+        let NowTimeLet = C.doms.timelines.filter("[index='"+C.index+"']").on("mouseover mouseout",preventDefault);
         if(C.doms.timelinesDiv.width()/2-NowTimeLet.offset().left<0)
         	C.doms.timelinesDiv.scrollLeft(NowTimeLet.offset().left-C.doms.timelinesDiv.width()/2);
         else if(C.doms.timelinesDiv.width()/2-NowTimeLet.offset().left>0){
         	C.doms.timelinesDiv.scrollLeft(0);
         }
-        NowTimeLet.addClass("focused").tooltipster('show').on("mouseout",preventDefault);
+        NowTimeLet.addClass("focused").tooltipster('show');
     }
 
     togglePage(from, to, type) {

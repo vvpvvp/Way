@@ -197,11 +197,6 @@ span#mouse-next.show {
 
 
 
-div#footer_icon {
-    width: 200px;
-    margin: 0 auto;
-}
-
 div#timeline>div {
     margin: 30px 0 0 70px;
     width: 10000px;
@@ -230,4 +225,46 @@ span.time.tooltipstered.focused {
 
 .leaflet-control-attribution.leaflet-control {
     display: none;
+}
+
+.momentInfo .icons {
+    height: 30px;
+    padding: 10px 0 5px;
+}
+
+.momentInfo .icons>span {
+    height: 26px;
+    width: 26px;
+    display: inline-block;
+    background-size: contain;
+    margin-right: 8px;
+   background-repeat:no-repeat;
+}
+
+span.emotion_happy {
+    background-image: url(/images/icons/happy@2x.png);
+}
+
+span.weather_cloud {
+    background-image: url(/images/icons/cloud@2x.png);
+}
+
+span.weather_rain {
+    background-image: url(/images/icons/hail@2x.png);
+}
+
+span.traffic_car {
+    background-image: url(/images/icons/car@2x.png);
+}
+
+span.traffic_bus {
+    background-image: url(/images/icons/bus@2x.png);
+}
+
+span.traffic_train {
+    background-image: url(/images/icons/train@2x.png);
+}
+
+span.emotion_sad {
+    background-image: url(/images/icons/devil@2x.png);
 }

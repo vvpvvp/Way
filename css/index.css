@@ -139,3 +139,8 @@ p.wayTitle {
 .leaflet-bottom.leaflet-right {
     display: none;
 }
+
+div#footer_icon {
+    width: 200px;
+    margin: 0 auto;
+}
