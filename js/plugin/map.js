@@ -28,6 +28,7 @@ class Map {
         }
         this.instance = null;
         this.d3path = null;
+        this.d3trigger = false;
         this.allowZoom = this.zoom,
         this.svg = null;
         this.init();
@@ -75,28 +76,39 @@ class Map {
 
         L.tileLayer(mapboxUrl, {id: mapboxId}).addTo(this.instance);
 
-        let width = $('.mapContainer').width();
-        let height = $('.mapContainer').height();
+        let width = $('.mapContainerDiv').width();
+        let height = $('.mapContainerDiv').height();
         let gps, lng, lat;
-
+        let _this = this;
+        
         this.svg = d3.select(this.instance.getPanes().overlayPane).append("svg")
             .attr('width', width)
             .attr('height', height);
 
+
         this.plan_polyline = this.drawPolyline(this.datas.plan, Map.GREY);
         this.onway_polyline = this.drawPolyline(this.datas.onway, Map.COLORFUL);
+
         $(".leaflet-marker-icon").tooltipster();
 
         if(this.user_marker)  {
             gps = this.datas.onway[0]['gps'];
             lng = gps[0];
             lat = gps[1];
-
-
             this.marker = this.addMarker({gps: [lat, lng], style: this.vehicles[0]});
         }
 
         this.focus(this.plan_polyline);
+
+        this.instance.on('moveend', function() {
+            console.log('move end ');
+            if(_this.polyline_animated && !_this.d3trigger) {
+                _this.d3trigger = true;
+                console.log('draw d3 line ing .....');
+                // _this.drawD3Line(_this.datas.plan, Map.GREY);
+                _this.drawD3Line(_this.datas.onway, Map.COLORFUL);
+            }
+        }) 
     }
 
     pack4Points(place) {
@@ -193,7 +205,16 @@ class Map {
         return L.marker(coord, {icon: icon, title: title}).addTo(this.instance);
     }
 
-    drawD3Line(style, gps_list) {
+    drawD3Line(datas, style) {
+
+        let i, lat, lng, gps_list = [];
+
+        for (i = 0; i <= datas.length - 1; i++) {
+            lng = datas[i]['gps'][0];
+            lat = datas[i]['gps'][1];
+            gps_list.push([lng, lat]);
+        }
+
         let geo_data = {
             "type": "FeatureCollection",
             "features": [
@@ -249,7 +270,7 @@ class Map {
     }
 
     drawPolyline(datas, style) {
-        let polyline, points = [], point, title, i, lat, lng, _options, gps_list = [];
+        let polyline, points = [], point, title, i, lat, lng, _options;
 
         for (i = 0; i <= datas.length - 1; i++) {
             lng = datas[i]['gps'][0];
@@ -259,7 +280,6 @@ class Map {
             points.push(point);
 
             if(datas[i]['location'] && datas[i]['location'].trim() != '')  {
-                gps_list.push([lng, lat]);
                 _options = {'gps': [lat, lng], style: 'blue', title: datas[i]['location'].trim()};
                 this.addMarker(_options);
             }
@@ -273,9 +293,6 @@ class Map {
             - draw the leaflet polyline with opacity == 1
         */
 
-        if(this.polyline_animated) {
-            this.drawD3Line(style, gps_list);
-        }
 
         polyline = L.polyline(points, {
             color: style,
