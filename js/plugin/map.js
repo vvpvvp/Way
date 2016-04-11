@@ -2,7 +2,7 @@ import L from "leaflet";
 
 
 class Map {
-    constructor(container, datas, options){
+    constructor(container, providerName, datas, options){
         this.container = container;
         this.datas = datas;
         this.user_marker = options ? options.user_marker : false;
@@ -31,7 +31,7 @@ class Map {
         this.d3trigger = false;
         this.allowZoom = this.zoom,
         this.svg = null;
-        this.init();
+        this.init(providerName);
     }
     
     transition(e, mapThis) {
@@ -61,20 +61,40 @@ class Map {
             })
     }
 
-    init(){
-        let mapboxId = 'yefei.jdc3fkbg',
-        mapboxUrl = 'http://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';
 
-        this.instance = L.map(this.container, {
-            center:[31.664789, 104.072941], 
-            zoom: 5, 
+    initSpecialProvider(name) {
+        let options = {
+            center:[31.664789, 104.072941],
+            zoom:5,
             zoomControl: this.allowZoom, 
             touchZoom:false, 
             scrollWheelZoom:false,
             doubleClickZoom:false
-        });
+        };
 
-        L.tileLayer(mapboxUrl, {id: mapboxId}).addTo(this.instance);
+        if(name === 'gaode') {
+            let normalm = L.tileLayer.chinaProvider('GaoDe.Normal.Map',{maxZoom:18,minZoom:5});
+            let normal = L.layerGroup([normalm]);
+     
+            options.layers = [normal];
+            this.instance = L.map(this.container,options);
+        }
+        else if(name === 'mapbox') {
+            let mapboxId = 'yefei.jdc3fkbg',
+            mapboxUrl = 'http://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';
+
+            this.instance = L.map(this.container,options);
+            L.tileLayer(mapboxUrl, {id: mapboxId}).addTo(this.instance);
+   
+        }
+        else {
+            throw new Error('Provider not defiend');
+        }
+    }
+
+    init(provideName){
+
+        this.initSpecialProvider(provideName);
 
         let width = $('.mapContainerDiv').width();
         let height = $('.mapContainerDiv').height();
@@ -327,5 +347,7 @@ Map.COLORFUL = '#5BE4CB';
 Map.MARKER_ORANGE = 'orange';
 Map.MARKER_BLUE = 'blue';
 Map.ANIMATED_DURATION = 2000;
+Map.GAODE = 'gaode';
+Map.MAPBOX = 'mapbox';
 
 export default Map;
