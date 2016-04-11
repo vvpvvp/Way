@@ -30,12 +30,10 @@ let indexInfo =
 let timeLine = `
 <div class="clear">
     {{#each days}}
-        <div class="timelines">
             <span class="timeSeperate">{{showDate}}</span>
             {{#each data}}
             <span class="time" title="{{dateTime}} {{location}}" index="{{index}}"></span>
             {{/each}}
-        </div>
     {{/each}}
 </div>
 `;
