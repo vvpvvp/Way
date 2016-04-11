@@ -268,3 +268,7 @@ span.traffic_train {
 span.emotion_sad {
     background-image: url(/images/icons/devil@2x.png);
 }
+
+.user-icon {
+    z-index: 1000!important;
+}

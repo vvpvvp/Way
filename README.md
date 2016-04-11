@@ -10,6 +10,7 @@ On The Way demo
     - user_marker: default false, would add a marker for the user position
     - polyline_animated: default false, would draw the both polyline polyline_animated
     - zoom: default false, the move would zoom on differrent area
+    - randomVehicle: defaule true, the move the swith to a randome vehicle
 
 NOTICE: if wanna to use zoom feature, make sure the object in onway has 'day' attribute
 
