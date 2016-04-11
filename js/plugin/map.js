@@ -15,8 +15,8 @@ class Map {
         this.icons = {
             'blue': L.icon({
                 iconUrl: 'images/markers-blue.png', 
-                iconSize: [16, 20],
-                iconAnchor: [9, 20],
+                iconSize: [14, 14],
+                iconAnchor: [8, 8],
                 popupAnchor: [16, 2]
             }),
             'orange': L.icon({
@@ -28,7 +28,7 @@ class Map {
         }
         this.instance = null;
         this.d3path = null;
-        this.allowZoom = false,
+        this.allowZoom = this.zoom,
         this.svg = null;
         this.init();
     }
@@ -67,10 +67,10 @@ class Map {
         this.instance = L.map(this.container, {
             center:[31.664789, 104.072941], 
             zoom: 5, 
-            zoomControl: false, 
-            touchZoom:this.allowZoom, 
-            scrollWheelZoom:this.allowZoom,
-            doubleClickZoom:this.allowZoom
+            zoomControl: this.allowZoom, 
+            touchZoom:false, 
+            scrollWheelZoom:false,
+            doubleClickZoom:false
         });
 
         L.tileLayer(mapboxUrl, {id: mapboxId}).addTo(this.instance);
@@ -85,6 +85,7 @@ class Map {
 
         this.plan_polyline = this.drawPolyline(this.datas.plan, Map.GREY);
         this.onway_polyline = this.drawPolyline(this.datas.onway, Map.COLORFUL);
+        $(".leaflet-marker-icon").tooltipster();
 
         if(this.user_marker)  {
             gps = this.datas.onway[0]['gps'];
@@ -118,7 +119,8 @@ class Map {
         this.marker.setLatLng([lat,lng]);
     }
 
-    move(place, duration, callback) {
+    move(index, duration, callback) {
+        let place = this.datas.onway[index];
         callback = callback || function() {};
 
         if(!this.user_marker) return;

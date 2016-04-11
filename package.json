@@ -26,6 +26,7 @@
           "leaflet/dist/leaflet.css",
           "jquery-mousewheel",
           "momentjs",
+          "lightbox2",
           "vivus",
           "handlebars/dist/handlebars",
           "./js/common"
@@ -46,6 +47,7 @@
     "jquery": "^2.2.3",
     "jquery-mousewheel": "^3.1.13",
     "leaflet": "^0.7.7",
+    "lightbox2": "^2.8.2",
     "mapbox": "^1.0.0-beta",
     "momentjs": "^1.0.2",
     "tipsy": "^1.0.0",
