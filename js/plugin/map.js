@@ -11,7 +11,7 @@ class Map {
         this.plan_polyline = null;
         this.onway_polyline = null;
         this.timeout = null;
-        this.vehicles = ['current', 'bicycle','bus', 'car', 'plan', 'ship', 'train'];
+        this.vehicles = ['current', 'bicycle','bus', 'car', 'plane', 'ship', 'train'];
         this.icons = {
             'blue': L.icon({
                 iconUrl: 'images/markers-blue.png', 
@@ -120,8 +120,12 @@ class Map {
     }
 
     move(index, duration, callback) {
-        let place = this.datas.onway[index];
         callback = callback || function() {};
+
+        let place = this.datas.onway[index];
+        let traffic = place['traffic'];
+
+        // console.log(place['traffic']);
 
         if(!this.user_marker) return;
         if(this.timeout) return;
@@ -153,7 +157,7 @@ class Map {
             let len = _this.vehicles.length;
             let index = 1+ Math.floor(parseInt(Math.random() * (len - 1)));
             let vehicle = _this.vehicles[index];
-            $(_this.marker._icon).attr('src', 'images/' + vehicle + '@2x.png');
+            $(_this.marker._icon).attr('src', 'images/icons/' + vehicle + '@2x.png');
             $(_this.marker._icon).css({transition: (l_duration + 's')});
             _this.marker.setLatLng(l_destination);
         }, 0);
@@ -162,7 +166,7 @@ class Map {
             clearTimeout(_this.timeout);
             _this.timeout = null;
             $(_this.marker._icon).css({transition: '0s'});
-            $(_this.marker._icon).attr('src', 'images/current@2x.png');
+            $(_this.marker._icon).attr('src', 'images/icons/current@2x.png');
             if(_this.zoom)
                 _this.instance.fitBounds(points);
             callback.call(_this);
@@ -179,9 +183,9 @@ class Map {
             icon = this.icons[style];
         else  // vehicles icons: car, plane, etc.
             icon = L.icon({
-                iconUrl: 'images/' + style +'@2x.png', 
-                iconSize: [24, 24],
-                iconAnchor: [12, 16],
+                iconUrl: 'images/icons/' + style +'@2x.png', 
+                iconSize: [18, 18],
+                iconAnchor: [10, 10],
                 popupAnchor: [24, 2],
                 className: 'user-icon'
             }); 
@@ -282,6 +286,8 @@ class Map {
 
         return polyline;
     }
+
+
 
 
     focus(ele) {
