@@ -11,6 +11,7 @@ class Map {
         this.plan_polyline = null;
         this.onway_polyline = null;
         this.timeout = null;
+        this.vehicles = ['current', 'bicycle','bus', 'car', 'plan', 'ship', 'train'];
         this.icons = {
             'blue': L.icon({
                 iconUrl: 'images/markers-blue.png', 
@@ -89,7 +90,9 @@ class Map {
             gps = this.datas.onway[0]['gps'];
             lng = gps[0];
             lat = gps[1];
-            this.marker = this.addMarker({gps: [lat, lng], style: Map.MARKER_ORANGE});
+
+
+            this.marker = this.addMarker({gps: [lat, lng], style: this.vehicles[0]});
         }
 
         this.focus(this.plan_polyline);
@@ -145,6 +148,10 @@ class Map {
         }
 
         setTimeout(function() {
+            let len = _this.vehicles.length;
+            let index = 1+ Math.floor(parseInt(Math.random() * (len - 1)));
+            let vehicle = _this.vehicles[index];
+            $(_this.marker._icon).attr('src', 'images/' + vehicle + '@2x.png');
             $(_this.marker._icon).css({transition: (l_duration + 's')});
             _this.marker.setLatLng(l_destination);
         }, 0);
@@ -153,6 +160,7 @@ class Map {
             clearTimeout(_this.timeout);
             _this.timeout = null;
             $(_this.marker._icon).css({transition: '0s'});
+            $(_this.marker._icon).attr('src', 'images/current@2x.png');
             if(_this.zoom)
                 _this.instance.fitBounds(points);
             callback.call(_this);
@@ -163,8 +171,20 @@ class Map {
         let coord = options['gps'];
         let style = options['style'] || 'blue';
         let title = options['title'] || '';
+        let icon;
 
-        return L.marker(coord, {icon: this.icons[style], title: title}).addTo(this.instance);
+        if(this.icons[style]) // pre-defined icons
+            icon = this.icons[style];
+        else  // vehicles icons: car, plane, etc.
+            icon = L.icon({
+                iconUrl: 'images/' + style +'@2x.png', 
+                iconSize: [24, 24],
+                iconAnchor: [12, 16],
+                popupAnchor: [24, 2],
+                className: 'user-icon'
+            }); 
+
+        return L.marker(coord, {icon: icon, title: title}).addTo(this.instance);
     }
 
     drawD3Line(style, gps_list) {

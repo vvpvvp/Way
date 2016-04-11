@@ -132,6 +132,9 @@ p.wayTitle {
     top: 0;
     bottom: 0;
 }
+.user-icon {
+    z-index: 1000!important;
+}
 
 .header-icon img {
     height: 100%;
