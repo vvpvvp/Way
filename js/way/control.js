@@ -60,14 +60,17 @@ class Control {
         let C = this;
         C.togglePage(C.page, $("#momentInfo_" + C.index), type);
         C.map.move(C.index, 1000);
-        C.doms.timelines.filter(".focused").removeClass("focused").tooltipster('hide').off("mouseover mouseout",preventDefault);
-        let NowTimeLet = C.doms.timelines.filter("[index='"+C.index+"']").on("mouseover mouseout",preventDefault);
+        C.doms.timelines.filter(".focused").removeClass("focused").tooltipster('hide').off("mouseover mouseleave",preventDefault);
+        let NowTimeLet = C.doms.timelines.filter("[index='"+C.index+"']").on("mouseover mouseleave",preventDefault);
         if(C.doms.timelinesDiv.width()/2-NowTimeLet.position().left-C.doms.timelinesDiv.scrollLeft()<0){
         	C.doms.timelinesDiv.scrollLeft(C.doms.timelinesDiv.scrollLeft()+NowTimeLet.position().left - C.doms.timelinesDiv.width()/2,100);
         }else if(C.doms.timelinesDiv.width()/2-NowTimeLet.position().left>0){
         	C.doms.timelinesDiv.scrollLeft(0,100);
         }
-        NowTimeLet.addClass("focused").tooltipster('show');
+        NowTimeLet.addClass("focused");
+        setTimeout(function() {
+            NowTimeLet.tooltipster('show');
+        }, 10);
     }
 
     togglePage(from, to, type) {
