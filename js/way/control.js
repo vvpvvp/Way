@@ -237,7 +237,7 @@ class Control {
                 // 	let content = data.way;
                 // 	let mapDom = $("#mapContainer_" + i);
 
-                C.map = new Map("mapContainer", C.data.way, { user_marker: true, polyline_animated: true, zoom: true });
+                C.map = new Map("mapContainer", Map.GAODE, C.data.way, { user_marker: true, polyline_animated: true, zoom: true });
                 C.doms.timelines.filter("[index='0']").addClass("focused");
                 C.doms.timelines.on("click",function(){
                 	let _this = $(this);

@@ -30,7 +30,8 @@
           "lightbox2",
           "vivus",
           "handlebars/dist/handlebars",
-          "./js/common"
+          "./js/common",
+          "./js/plugin/leaflet.ChineseTmsProviders"
         ]
       },
       "resolve": {
