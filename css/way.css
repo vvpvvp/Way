@@ -153,8 +153,8 @@ span#mouse-next.show {
 }
 
 .momentInfo .images img {
-    /* width: 40%; */
-    height: 300px;
+    width: 70%;
+    /* height: 300px; */
     float: left;
     margin: 0 5% 20px 0;
     display: inline-block;
@@ -167,7 +167,7 @@ span#mouse-next.show {
     padding: 10px 0 0px;
 }
 
-.timelines>.timeSeperate {
+#timeline>.clear>.timeSeperate {
     margin-top: 0;
     height: 20px;
     position: relative;
@@ -181,7 +181,7 @@ span#mouse-next.show {
     padding: 0px 10px;
 }
 
-.timelines>.time {
+#timeline>.clear>.time {
     border-radius: 10px;
     position: relative;
     height: 10px;
@@ -202,24 +202,24 @@ div#timeline>div {
     width: 10000px;
 }
 
-.timelines>.time:hover {
+#timeline>.clear>.time:hover {
     background-color: #89EFBD;
 }
 
-.timelines>span::after {content: "";display: block;float: left;width: 30px;background-color: #eee;height: 3px;margin-left: 14px;margin-top: 4px;border-radius: 10px;}
+#timeline>.clear>span::after {content: "";display: block;float: left;width: 30px;background-color: #eee;height: 3px;margin-left: 14px;margin-top: 4px;border-radius: 10px;}
 
-.timelines>.timeSeperate::after {
+#timeline>.clear>.timeSeperate::after {
     margin-top: 8px;
     position: absolute;
     top: 0;
     right: -35px;
 }
 
-.timelines:last-child>span:last-child::after {
+#timeline>.clear:last-child>span:last-child::after {
     display: none;
 }
 
-span.time.tooltipstered.focused {
+#timeline>.clear>.time.focused {
     background-color: #1EC172;
 }
 

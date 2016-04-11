@@ -12,6 +12,7 @@
     "port": 9001,
     "mock": false,
     "react": false,
+    "copy": ["data/*","images/*"],
     "webpack": {
       "output": {
         "*.html": {}
@@ -33,6 +34,11 @@
           "./js/plugin/leaflet.ChineseTmsProviders"
         ]
       },
+      "resolve": {
+          "alias": {
+              "handlebars": "handlebars/dist/handlebars"
+          }
+      },
       "global": {
         "$": "jquery",
         "d3": "d3",
@@ -40,8 +46,7 @@
         "Common": "./js/common"
       },
       "devServer": {}
-    },
-    "copy": []
+    }
   },
   "dependencies": {
     "handlebars": "^4.0.5",
