@@ -73,7 +73,7 @@ class Control{
 		let content = data.way;
 		let mapDom = $("#mapContainer_" + i);
 
-		let map = new Map(mapDom.attr("id"), Map.GAODE, content);
+		let map = new Map(mapDom.attr("id"), Map.MAPBOX, content);
 		// let drawPoly = map.drawPolyline(content.plan,Map.GREY);
 		// map.drawPolyline(content.onway,Map.COLORFUL);
 		// map.focus(drawPoly);

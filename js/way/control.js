@@ -60,17 +60,17 @@ class Control {
         let C = this;
         C.togglePage(C.page, $("#momentInfo_" + C.index), type);
         C.map.move(C.index, 1000);
-        C.doms.timelines.filter(".focused").removeClass("focused").tooltipster('hide').off("mouseover mouseleave",preventDefault);
-        let NowTimeLet = C.doms.timelines.filter("[index='"+C.index+"']").on("mouseover mouseleave",preventDefault);
+        C.doms.timelines.filter(".focused").removeClass("focused").tooltipster('hide');
+
+
+        let NowTimeLet = C.doms.timelines.filter("[index='"+C.index+"']");
         if(C.doms.timelinesDiv.width()/2-NowTimeLet.position().left-C.doms.timelinesDiv.scrollLeft()<0){
         	C.doms.timelinesDiv.scrollLeft(C.doms.timelinesDiv.scrollLeft()+NowTimeLet.position().left - C.doms.timelinesDiv.width()/2,100);
         }else if(C.doms.timelinesDiv.width()/2-NowTimeLet.position().left>0){
         	C.doms.timelinesDiv.scrollLeft(0,100);
         }
-        NowTimeLet.addClass("focused");
-        setTimeout(function() {
-            NowTimeLet.tooltipster('show');
-        }, 10);
+        NowTimeLet.addClass("focused").tooltipster("show");
+        // NowTimeLet.click();
     }
 
     togglePage(from, to, type) {
@@ -213,10 +213,6 @@ class Control {
                 $('#timeline').append(timelineTemp(C.data));
         		
 
-        		$("#timeline .time").tooltipster({
-					position: 'bottom',
-					theme: 'tooltipster-shadow'
-				});
 
                 C.doms = {
                     mouse: $("#mouse-next"),
@@ -224,6 +220,24 @@ class Control {
                     timelines:$("#timeline .time"),
                     timelinesDiv:$("#timeline")
                 };
+                C.doms.timelines.each((i,n)=>{
+                    let title = n.title;
+                    $(n).tooltipster({
+                        position: 'bottom',
+                        content:title,
+                        theme: 'tooltipster-shadow',
+                        multiple: true,
+                    });
+                    $(n).tooltipster({
+                        position: 'bottom',
+                        content:title,
+                        trigger:"click",
+                        autoClose:"false",
+                        theme: 'tooltipster-shadow',
+                        multiple: true,
+                    });
+                });
+
                 //初次执行；
                 C.page = $(".userInfo");
                 let pos = C.getScrollPostion();
@@ -238,7 +252,7 @@ class Control {
                 // 	let mapDom = $("#mapContainer_" + i);
 
                 C.map = new Map("mapContainer", Map.GAODE, C.data.way, { user_marker: true, polyline_animated: true, zoom: true });
-                C.doms.timelines.filter("[index='0']").addClass("focused");
+                // C.doms.timelines.filter("[index='0']").addClass("focused");
                 C.doms.timelines.on("click",function(){
                 	let _this = $(this);
                 	let _index = parseInt(_this.attr("index"));

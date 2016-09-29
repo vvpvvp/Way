@@ -93,7 +93,7 @@
                 "date": 1348103700000,
                 "weather": "rain",
                 "feeling": "sad",
-                "traffic": "walk"
+                "traffic": "bus"
             }, {
                 "location": "龙抄手(春熙路总店)",
                 "gps": [104.084181, 30.660397],
@@ -218,15 +218,15 @@
     {
         "id": 1,
         "basic": {
-            "name": "Jona",
-            "sex": "female",
+            "name": "Kil",
+            "sex": "male",
             "avatar": "/images/avatar.png",
-            "age": 34,
-            "profession": "插画师"
+            "age": 23,
+            "profession": "软件工程师"
         },
         "way": {
             "id": 123,
-            "title": "2012 川藏线冒险之旅",
+            "title": "2014 内蒙的草原",
             "startDate": 1347943200000,
             "plan": [{
                 "location": "芜湖市火车站 中国",
@@ -319,15 +319,15 @@
     {
         "id": 1,
         "basic": {
-            "name": "Jona",
+            "name": "Katy",
             "sex": "female",
             "avatar": "/images/avatar.png",
-            "age": 34,
-            "profession": "插画师"
+            "age": 30,
+            "profession": "自由职业着"
         },
         "way": {
             "id": 123,
-            "title": "2012 川藏线冒险之旅",
+            "title": "2013 湘贵云川之旅",
             "startDate": 1347943200000,
             "plan": [{
                 "location": "芜湖市火车站 中国",
